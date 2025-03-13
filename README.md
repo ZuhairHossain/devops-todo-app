@@ -107,7 +107,7 @@
 ## Task 4: Log Management
 
 ### Incomplete Task:
-- **Reason for Incompletion:** Due to resource constraints, I was unable to set up Fluent Bit and the ELK stack for log management. This includes:
+- **Reason for Incompletion:** Due to resource constraints, I was unable to set up the ELK stack for log management. This includes:
   - Shipping logs from the Demo App to ELK.
   - Creating a dashboard in Kibana.
   - Implementing a 2-day log retention policy.
@@ -129,20 +129,3 @@
 While I was able to complete most of the tasks, I faced challenges with resource-intensive tasks like setting up the ELK stack in my local PC. I have documented all completed tasks and provided explanations for the incomplete ones. If given more resources and time, I would be able to complete the remaining tasks.
 
 ---
-
-### Repository Structure
-devops-exam/
-├── Task-1-Kubernetes-Cluster/
-│ ├── manifest.yaml
-│ ├── pv-pvc.yaml
-│ └── ...
-├── Task-2-Docker-Image/
-│ ├── Dockerfile
-│ ├── optimized-docker-image/
-│ └── ...
-├── Task-3-Kubernetes-Deployment/
-│ ├── deployment.yaml
-│ ├── service.yaml
-│ ├── vault-config.yaml
-│ └── ...
-└── README.md
