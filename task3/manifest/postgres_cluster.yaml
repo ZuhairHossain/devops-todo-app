@@ -1,0 +1,14 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: todo-postgres-cluster
+  namespace: todo-app
+spec:
+  instances: 2
+  storage:
+    size: 2Gi
+  bootstrap:
+    initdb:
+      database: todo_db
+      owner: todo_user
+  primaryUpdateStrategy: unsupervised
