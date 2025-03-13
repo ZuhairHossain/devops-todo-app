@@ -109,7 +109,7 @@ The cluster was created using `kubeadm`, and I followed the steps from this GitH
     kubectl get nodes
     ```
 
-![Screenshot of the created Kubernetes cluster:](task1\images\cluster_status.png)
+![Screenshot of the created Kubernetes cluster:](https://github.com/ZuhairHossain/devops-todo-app/blob/master/task1/images/cluster_status.png)
 
 
 # Persistent Volume (PV) and Persistent Volume Claim (PVC) Creation
@@ -196,9 +196,9 @@ In this section, I created a **Persistent Volume (PV)** and **Persistent Volume 
     ```bash
     k apply -f logstash.yaml
     ```
-![Screenshot of the created ELK Status:](task1\images\elk_status.png)
+![Screenshot of the created ELK Status:](task1/images/elk_status.jpg)
 
-![Screenshot of the created Kibana Status:](task1\images\kibana_status.png)
+![Screenshot of the created Kibana Status:](task1/images/kibana_status.png)
 
 
 
@@ -213,21 +213,3 @@ My local PC has 16 GB RAM and 4 cores CPU, which is not sufficient to run Elasti
 
 ### Workaround Attempts 
 I tried reducing the resource requests and limits for Elasticsearch, but it still caused system instability.
-
-# Repository Structure for Task 1
-
-task1/
-├── manifests/
-│   ├── kibana.yaml
-│   ├── logstash.yaml
-│   └── ...
-├── create_pv.yaml
-├── create_pvc.yaml
-├── images/
-│   ├── cluster_status.png
-│   ├── pv_status.png
-│   ├── pvc_status.png
-│   ├── kibana_status.png
-│   ├── logstash_status.png
-│   └── ...
-└── README.md
