@@ -196,6 +196,11 @@ In this section, I created a **Persistent Volume (PV)** and **Persistent Volume 
     ```bash
     k apply -f logstash.yaml
     ```
+![Screenshot of the created ELK Status:](task1\images\elk_status.png)
+
+![Screenshot of the created Kibana Status:](task1\images\kibana_status.png)
+
+
 
 ---
 # Challenges Faced with Elasticsearch
