@@ -173,7 +173,7 @@ In this section, I created a **Persistent Volume (PV)** and **Persistent Volume 
     ```bash
     k get pvc
     ```    
-![Screenshot of the created Kubernetes PV & PVC:](task1\images\pv_and_pvc_status.png)
+![Screenshot of the created Kubernetes PV & PVC:](https://github.com/ZuhairHossain/devops-todo-app/blob/master/task1/images/pv_and_pvc_status.png)
 
 ---
 
@@ -196,9 +196,9 @@ In this section, I created a **Persistent Volume (PV)** and **Persistent Volume 
     ```bash
     k apply -f logstash.yaml
     ```
-![Screenshot of the created ELK Status:](task1/images/elk_status.jpg)
+![Screenshot of the created ELK Status:](https://github.com/ZuhairHossain/devops-todo-app/blob/master/task1/images/elk_status.png)
 
-![Screenshot of the created Kibana Status:](task1/images/kibana_status.png)
+![Screenshot of the created Kibana Status:](https://github.com/ZuhairHossain/devops-todo-app/blob/master/task1/images/kibana_status.png)
 
 
 
