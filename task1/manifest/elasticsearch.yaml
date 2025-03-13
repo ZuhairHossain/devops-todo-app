@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch
+  namespace: elk
+spec:
+  replicas: 1
+  podManagementPolicy: OrderedReady
+  serviceName: elasticsearch
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+    spec:
+      containers:
+      - name: elasticsearch
+        image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+        imagePullPolicy: Always  # Always pull the latest image
+        ports:
+        - containerPort: 9200
+          protocol: TCP
+        env:
+        - name: discovery.type
+          value: single-node  # For a single node Elasticsearch setup
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
+          limits:
+            memory: "8Gi"
+            cpu: "2"
+        volumeMounts:
+        - mountPath: /usr/share/elasticsearch/data
+          name: es-storage
+
+        # Readiness and Liveness probes
+        livenessProbe:
+          httpGet:
+            path: /_cluster/health
+            port: 9200
+          initialDelaySeconds: 30   # Wait for 30 seconds before checking
+          periodSeconds: 10         # Check every 10 seconds
+          failureThreshold: 3       # Fail after 3 failed attempts
+
+        readinessProbe:
+          httpGet:
+            path: /_cluster/health
+            port: 9200
+          initialDelaySeconds: 30   # Wait for 30 seconds before checking
+          periodSeconds: 10         # Check every 10 seconds
+          failureThreshold: 3       # Fail after 3 failed attempts
+
+  volumeClaimTemplates:
+  - metadata:
+      name: es-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 5Gi
+      volumeMode: Filesystem

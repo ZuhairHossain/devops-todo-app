@@ -102,5 +102,127 @@ The cluster was created using `kubeadm`, and I followed the steps from this GitH
 
 - Joined the worker nodes (worker-1 and worker-2) to the cluster using the kubeadm join command provided after initialization.
 
-![See the attached screenshot](task1\images\Screenshot_1.png)
+### 8. **Verify Cluster Status**
+- After setting up the cluster, verified the status of the nodes using:
 
+    ```bash
+    kubectl get nodes
+    ```
+
+![Screenshot of the created Kubernetes cluster:](task1\images\cluster_status.png)
+
+
+# Persistent Volume (PV) and Persistent Volume Claim (PVC) Creation
+
+## Overview
+In this section, I created a **Persistent Volume (PV)** and **Persistent Volume Claim (PVC)** in the Kubernetes cluster. The PV provides storage for the cluster, and the PVC requests storage from the PV.
+
+---
+
+## Steps to Create PV and PVC
+
+### 1. **Persistent Volume (PV)**
+- Created a YAML file named `create_pv.yaml` to define a Persistent Volume (PV) with the following configuration:
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: local-pv
+  spec:
+    capacity:
+      storage: 10Gi
+    accessModes:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Retain
+    storageClassName: local-storage
+    hostPath:
+      path: "/mnt/data"  # This directory must exist on the node
+      type: DirectoryOrCreate
+    ```
+ - Applied the PV configuration using:
+    ```bash
+    kubectl apply -f create_pv.yaml
+    ```
+
+### 2. **Persistent Volume Claim (PVC)**
+- Created a YAML file named create_pvc.yaml to define a Persistent Volume Claim (PVC) with the following configuration:
+    ```yaml
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+        name: local-pvc
+    spec:
+        accessModes:
+            - ReadWriteOnce
+    resources:
+        requests:
+            storage: 5Gi
+    storageClassName: local-storage
+  ```
+- Applied the PVC configuration using:
+    ```bash
+    kubectl apply -f create_pvc.yaml
+    ```
+
+### 3. **Verify PV and PVC Status**
+- Verified the status of the Persistent Volume (PV) using:
+    ```bash
+    k get pv
+    ```
+- Verified the status of the Persistent Volume Claim (PVC) using:
+    ```bash
+    k get pvc
+    ```    
+![Screenshot of the created Kubernetes PV & PVC:](task1\images\pv_and_pvc_status.png)
+
+---
+
+# ELK Stack Setup (Kibana and Logstash)
+
+## Overview
+#### As part of the task, I attempted to set up the ELK Stack (Elasticsearch, Logstash, Kibana) for log management and monitoring. However, due to memory constraints on my local PC (Windows 10), I was only able to successfully install Kibana and Logstash. Elasticsearch caused my system to hang and crash, so I could not complete its installation.
+
+### Steps to Install Kibana and Logstash
+
+### 1. **Kibana Installation**
+- Created a YAML file named kibana.yaml to deploy Kibana in the Kubernetes cluster
+- Applied the Kibana configuration using:
+    ```bash
+    k apply -f kibana.yaml
+    ```
+### 2. **Logstash Installation**
+- Created a YAML file named logstash.yaml to deploy Logstash in the Kubernetes cluster:
+- Applied the Logstash configuration using:
+    ```bash
+    k apply -f logstash.yaml
+    ```
+
+---
+# Challenges Faced with Elasticsearch
+
+### Memory Constraints: 
+Elasticsearch requires significant memory to run. When I attempted to install Elasticsearch, my local PC (Windows 10) started hanging and eventually crashed due to insufficient memory.
+
+### Resource Limitations
+My local PC has 16 GB RAM and 4 cores CPU, which is not sufficient to run Elasticsearch alongside Kibana and Logstash in a Kubernetes cluster.
+
+### Workaround Attempts 
+I tried reducing the resource requests and limits for Elasticsearch, but it still caused system instability.
+
+# Repository Structure for Task 1
+
+task1/
+├── manifests/
+│   ├── kibana.yaml
+│   ├── logstash.yaml
+│   └── ...
+├── create_pv.yaml
+├── create_pvc.yaml
+├── images/
+│   ├── cluster_status.png
+│   ├── pv_status.png
+│   ├── pvc_status.png
+│   ├── kibana_status.png
+│   ├── logstash_status.png
+│   └── ...
+└── README.md
